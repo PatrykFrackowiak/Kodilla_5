@@ -8,6 +8,21 @@ function clearMessages() {
 	document.getElementById('messages').innerHTML = '';
 }
 
+function addListeners(){
+	document.getElementById('play-rock').addEventListener('click', function(){ playGame(1);});
+	document.getElementById('play-paper').addEventListener('click', function(){ playGame(2);});
+	document.getElementById('play-scissors').addEventListener('click', function(){ playGame(3);});
+}
+
+function playGame(playerInput) {
+	clearMessages();
+    let playerMove = getMove(playerInput);
+    printMessage('Twój ruch to: ' + playerMove);
+    let computerMove = randomMove();
+    printMessage('Ruch komputera to: ' + computerMove);
+    printMessage(getResult(playerMove, computerMove));
+}
+
 function randomMove() {
 	return getMove(Math.floor(Math.random() * 3 + 1));
 }
