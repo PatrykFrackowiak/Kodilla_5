@@ -1,54 +1,58 @@
-function printMessage(msg) {
+const stone = 'kamień';
+const scissors = 'nożyce';
+const paper = 'papier';
+
+const printMessage = function (msg) {
 	let div = document.createElement('div');
 	div.innerHTML = msg;
 	document.getElementById('messages').appendChild(div);
 }
 
-function clearMessages() {
+const clearMessages = function () {
 	document.getElementById('messages').innerHTML = '';
 }
 
-function addListeners(){
-	document.getElementById('play-rock').addEventListener('click', function(){ playGame(1);});
-	document.getElementById('play-paper').addEventListener('click', function(){ playGame(2);});
-	document.getElementById('play-scissors').addEventListener('click', function(){ playGame(3);});
+const addListeners = function () {
+	document.getElementById('play-rock').addEventListener('click', function () { playGame(1); });
+	document.getElementById('play-paper').addEventListener('click', function () { playGame(2); });
+	document.getElementById('play-scissors').addEventListener('click', function () { playGame(3); });
 }
 
-function playGame(playerInput) {
+const playGame = function (playerInput) {
 	clearMessages();
-    let playerMove = getMove(playerInput);
-    printMessage('Twój ruch to: ' + playerMove);
-    let computerMove = randomMove();
-    printMessage('Ruch komputera to: ' + computerMove);
-    printMessage(getResult(playerMove, computerMove));
+	let playerMove = getMove(playerInput);
+	printMessage('Twój ruch to: ' + playerMove);
+	let computerMove = randomMove();
+	printMessage('Ruch komputera to: ' + computerMove);
+	printMessage(getResult(playerMove, computerMove));
 }
 
-function randomMove() {
+const randomMove = function () {
 	return getMove(Math.floor(Math.random() * 3 + 1));
 }
 
-function getMove(input) {
+const getMove = function (input) {
 	if (input == '1') {
-		return 'kamień';
+		return stone;
 	} else if (input == '2') {
-		return 'papier';
+		return paper;
 	} else if (input == '3') {
-		return 'nożyce';
+		return scissors;
 	}
 	return 'nieznany ruch';
 }
 
-function getResult(playerMove, computerMove) {
+const getResult = function (playerMove, computerMove) {
 	if (playerMove == computerMove) {
 		return 'remis';
 	}
-	if (playerMove == 'kamień' && computerMove == "nożyce") {
+	if (playerMove == stone && computerMove == scissors) {
 		return 'wygrałeś';
 	}
-	if (playerMove == 'papier' && computerMove == "kamień") {
+	if (playerMove == paper && computerMove == stone) {
 		return 'wygrałeś';
 	}
-	if (playerMove == 'nożyce' && computerMove == "papier") {
+	if (playerMove == scissors && computerMove == paper) {
 		return 'wygrałeś';
 	}
 	return 'przegrałeś';
